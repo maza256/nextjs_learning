@@ -7,6 +7,7 @@ export type User = {
   name: string;
   email: string;
   password: string;
+  role: 'admin' | 'user';
 };
 
 export type Customer = {
@@ -86,3 +87,9 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export type SessionPayload = {
+  userId: string,
+  isAdmin: boolean
+  expiresAt: Date
+}
