@@ -153,8 +153,6 @@ export async function authenticate(
             throw new Error("Could not find user")
         }
 
-        console.log("We got a user!")
-
         const session = await createSession(userid);
 
         // Set the session cookie

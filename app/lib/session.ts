@@ -9,7 +9,6 @@ const secretKey = process.env.AUTH_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function encrypt(payload: SessionPayload) {
-    console.log(secretKey)
     return new SignJWT(payload)
         .setProtectedHeader({alg: 'HS256'})
         .setIssuedAt()

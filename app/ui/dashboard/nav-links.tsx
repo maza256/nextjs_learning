@@ -11,20 +11,38 @@ import clsx from "clsx";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  {
+    name: 'Home',
+    href: '/dashboard',
+    icon: HomeIcon,
+    roles: ['admin', 'user']
+  },
   {
     name: 'Invoices',
     href: '/dashboard/invoices',
     icon: DocumentDuplicateIcon,
+    roles: ['admin']
   },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  {
+    name: 'Customers',
+    href: '/dashboard/customers',
+    icon: UserGroupIcon,
+    roles: ['admin', 'user']
+  },
 ];
 
-export default function NavLinks() {
+type NavLinksProps = {
+  role: string;
+}
+
+export default function NavLinks({role} : NavLinksProps) {
+
   const pathName = usePathname();
   return (
     <>
-      {links.map((link) => {
+      {links.
+          filter(link => link.roles.includes(role))
+          .map((link) => {
         const LinkIcon = link.icon;
         return (
           <Link
