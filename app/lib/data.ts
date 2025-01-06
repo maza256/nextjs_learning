@@ -17,9 +17,7 @@ export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
-
-    console.log('Fetching revenue data...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    //await new Promise((resolve) => setTimeout(resolve, 3000));
 
 //    await pool.connect()
     const data: QueryResult<Revenue> = await pool.query<Revenue>(`SELECT * FROM revenue`);
@@ -219,6 +217,20 @@ export async function getUser(email: string): Promise<User | undefined> {
     const user = await pool.query<User>(`SELECT *
                                              FROM users
                                              WHERE email = $1`, [email]);
+    return user.rows[0];
+  }
+  catch (error) {
+    console.error(error);
+    throw new Error("Failed to find user");
+  }
+}
+
+export async function getUserById(id: string): Promise<User | undefined> {
+  try {
+    const pool = Database.getInstance()
+    const user = await pool.query<User>(`SELECT *
+                                             FROM users
+                                             WHERE id = $1`, [id]);
     return user.rows[0];
   }
   catch (error) {

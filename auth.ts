@@ -5,8 +5,9 @@ import { z } from "zod";
 import Database from "@/app/lib/db";
 import bcrypt from "bcrypt";
 import { getUser } from "@/app/lib/data";
+import {cookies} from "next/headers";
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { auth, signIn } = NextAuth({
     ...authConfig,
     providers: [
         Credentials({
@@ -30,6 +31,11 @@ export const { auth, signIn, signOut } = NextAuth({
         }),
     ],
 });
+
+export async function signOut() {
+    const cookieStore = await cookies();
+    cookieStore.delete('session');
+}
 
 // export const {auth, signIn, signOut} = NextAuth({
 //     ...authConfig,

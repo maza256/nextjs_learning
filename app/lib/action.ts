@@ -4,10 +4,12 @@ import Database from "../lib/db"
 import { revalidatePath } from "next/cache";
 import {redirect} from "next/navigation";
 import {signIn} from "@/auth";
-import {AuthError, NextAuthResult, Session} from "next-auth";
+import {AuthError, NextAuthConfig, NextAuthResult, Session} from "next-auth";
 import {createSession} from "@/app/lib/session";
 import  getServerSession  from "next-auth";
 import { authConfig} from "@/auth.config";
+import { cookies } from 'next/headers';
+import {getUser} from "@/app/lib/data";
 
 const FormSchema = z.object({
     id: z.string(),
@@ -126,14 +128,46 @@ export async function deleteInvoice(id: string) {
     }
     revalidatePath("/dashboard/invoices");
 }
+interface ExtendedSession extends Session {
+    expires: string;
 
+}
 export async function authenticate(
     prevState: string | undefined,
     formData: FormData,
 ) {
     try {
-        await signIn('credentials', formData);
+        const response = await signIn('credentials', {
+            redirect: false,
+            email: formData.get('email'),
+            password: formData.get('password'),
+        });
 
+        if (response?.error) {
+            return "Invalid credentials";
+        }
+
+        const user = await getUser(<string>formData.get('email'));
+        const userid = user?.id;
+        if (userid == null) {
+            throw new Error("Could not find user")
+        }
+
+        console.log("We got a user!")
+
+        const session = await createSession(userid);
+
+        // Set the session cookie
+        const cookieStore = await cookies();
+        const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        cookieStore.set('session', JSON.stringify(session), {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'lax',
+            expires: expiresInOneDay,
+        });
+        revalidatePath("/dashboard");
+        redirect("/dashboard");
         return "Login Succesful"
     } catch (error) {
         if (error instanceof AuthError) {

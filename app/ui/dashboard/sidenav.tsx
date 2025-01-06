@@ -3,6 +3,7 @@ import NavLinks from '@/app/ui/dashboard/nav-links';
 import AcmeLogo from '@/app/ui/acme-logo';
 import {PowerIcon} from '@heroicons/react/24/outline';
 import {signOut} from "@/auth";
+import {redirect} from "next/navigation";
 
 
 export default function SideNav() {
@@ -23,6 +24,7 @@ export default function SideNav() {
                     action={async () => {
                         'use server';
                         await signOut();
+                        redirect("/login");
                     }}
                 >
                     <button
