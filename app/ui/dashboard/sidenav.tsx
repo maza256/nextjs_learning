@@ -6,7 +6,14 @@ import {signOut} from "@/auth";
 import {redirect} from "next/navigation";
 import { getSession } from "@/app/lib/session";
 
-export default async function SideNav() {
+type Link = {
+    name: string;
+    href: string;
+    icon: string;
+    roles: string[];
+};
+
+export default async function SideNav({ links }: { links: Link[] }) {
     const session = await getSession();
     const role = session?.isAdmin ? 'admin' : 'user';
     return (
@@ -20,7 +27,7 @@ export default async function SideNav() {
                 </div>
             </Link>
             <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-                <NavLinks role={role}/>
+                <NavLinks role={role} links={links}/>
                 <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
                 <form
                     action={async () => {
