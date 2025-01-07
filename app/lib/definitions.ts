@@ -93,3 +93,10 @@ export type SessionPayload = {
   isAdmin: boolean
   expiresAt: Date
 }
+
+export type LinkType = {
+  name: string;
+  href: string;
+  icon: string;
+  roles: string[];
+};

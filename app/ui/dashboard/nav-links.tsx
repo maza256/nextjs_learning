@@ -4,47 +4,13 @@ import {usePathname} from "next/navigation";
 import clsx from "clsx";
 import React from "react";
 import { HomeIcon, DocumentDuplicateIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { LinkType } from '@/app/lib/definitions';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
-// const links = [
-//   {
-//     name: 'Home',
-//     href: '/dashboard',
-//     icon: HomeIcon,
-//     roles: ['admin', 'user']
-//   },
-//   {
-//     name: 'Invoices',
-//     href: '/dashboard/invoices',
-//     icon: DocumentDuplicateIcon,
-//     roles: ['admin']
-//   },
-//   {
-//     name: 'Customers',
-//     href: '/dashboard/customers',
-//     icon: UserGroupIcon,
-//     roles: ['admin', 'user']
-//   },
-// ];
 
 type NavLinksProps = {
     role: string;
 }
-type Link = {
-    name: string;
-    href: string;
-    icon: string;
-    roles: string[];
-};
 
-// NavLinks({
-//   links,
-//   role,
-// }: {
-//   links: Link[];
-//   role: string;
-// }) {
 
 const iconMapping: { [key: string]: React.ComponentType<{className?: string}> } = {
     HomeIcon: HomeIcon,
@@ -57,7 +23,7 @@ export default function NavLinks({
                                      links,
                                  }: {
     role: string,
-    links: Link[]
+    links: LinkType[]
 }) {
 
     const pathName = usePathname();

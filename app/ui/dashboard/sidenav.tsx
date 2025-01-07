@@ -5,15 +5,9 @@ import {PowerIcon} from '@heroicons/react/24/outline';
 import {signOut} from "@/auth";
 import {redirect} from "next/navigation";
 import { getSession } from "@/app/lib/session";
+import { LinkType} from "@/app/lib/definitions";
 
-type Link = {
-    name: string;
-    href: string;
-    icon: string;
-    roles: string[];
-};
-
-export default async function SideNav({ links }: { links: Link[] }) {
+export default async function SideNav({ links }: { links: LinkType[] }) {
     const session = await getSession();
     const role = session?.isAdmin ? 'admin' : 'user';
     return (
