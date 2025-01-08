@@ -1,11 +1,6 @@
 import bcrypt from 'bcrypt';
-//import { db } from '@vercel/postgres';
 import {customers, invoices, revenue, users} from '../lib/placeholder-data';
 import {Client} from 'pg';
-// import * as dotenv from 'dotenv';
-// dotenv.config({path : '../../.env'})
-
-// require('dotenv').config({ path: '../../../.env'});
 
 
 const pool = new Client({

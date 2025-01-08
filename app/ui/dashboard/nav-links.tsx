@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {usePathname} from "next/navigation";
 import clsx from "clsx";
 import React from "react";
-import { HomeIcon, DocumentDuplicateIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import {HomeIcon, DocumentDuplicateIcon, UserGroupIcon, GlobeEuropeAfricaIcon} from '@heroicons/react/24/outline';
 import { LinkType } from '@/app/lib/definitions';
 
 
@@ -16,6 +16,7 @@ const iconMapping: { [key: string]: React.ComponentType<{className?: string}> } 
     HomeIcon: HomeIcon,
     DocumentDuplicateIcon: DocumentDuplicateIcon,
     UserGroupIcon: UserGroupIcon,
+    GlobeEuropeAfricaIcon: GlobeEuropeAfricaIcon,
 };
 
 export default function NavLinks({

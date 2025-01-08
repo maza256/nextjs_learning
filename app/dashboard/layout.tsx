@@ -1,5 +1,5 @@
 import SideNav from '@/app/ui/dashboard/sidenav';
-import {DocumentDuplicateIcon, HomeIcon, UserGroupIcon} from "@heroicons/react/24/outline";
+import {DocumentDuplicateIcon, HomeIcon, UserGroupIcon, GlobeEuropeAfricaIcon} from "@heroicons/react/24/outline";
 
 export const experimental_ppr = true;
 const links = [
@@ -21,6 +21,12 @@ const links = [
         icon: 'UserGroupIcon',
         roles: ['admin', 'user']
     },
+    {
+        name: 'Holidays',
+        href: '/dashboard/holidays',
+        icon: 'GlobeEuropeAfricaIcon',
+        roles: ['user', 'admin']
+    }
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
