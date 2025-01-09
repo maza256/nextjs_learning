@@ -16,3 +16,14 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.rdp-root {
+  --rdp-accent-color: indigo; /* Change the accent color to indigo. */
+  --rdp-accent-background-color: #f0f0f0; /* Change the accent background color. */
+  /* Add more CSS variables here. */
+}
+
+.rdp-root .rdp-day_selected {
+  background-color: var(--rdp-accent-color);
+  color: red;
+}

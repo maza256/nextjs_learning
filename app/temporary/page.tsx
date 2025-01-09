@@ -3,7 +3,7 @@
 import * as React from "react"
 
 import { Calendar } from "@/components/ui/calendar"
-
+import {DateRange} from "react-day-picker";
 
 export default function Page() {
     const [date, setDate] = React.useState<Date | undefined>(new Date())

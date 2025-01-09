@@ -9,7 +9,7 @@ import { LinkType} from "@/app/lib/definitions";
 
 export default async function SideNav({ links }: { links: LinkType[] }) {
     const session = await getSession();
-    const role = session?.isAdmin ? 'admin' : 'user';
+    const role = session?.isAdmin ? 'temporary' : 'user';
     return (
         <div className="flex h-full flex-col px-3 py-4 md:px-2">
             <Link
