@@ -3,13 +3,29 @@
 import * as React from "react"
 
 import { Calendar } from "@/components/ui/calendar"
+import {DateRange} from "react-day-picker";
 
 export default function CalendarDemo() {
-    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const [date, setDate] = React.useState<DateRange>({from: undefined, to: undefined});
+
+    const handleSelect = (daySelection: DateRange | undefined) => {
+        console.log(daySelection);
+        if(date.from === undefined) {
+            console.log("Setting to")
+            setDate({from: daySelection?.from, to: undefined});
+        } else if (date.to === undefined) {
+            console.log("Setting from")
+            setDate({from: date.from, to: daySelection?.to});
+        } else {
+            console.log("Resetting it")
+            setDate({from: undefined, to:undefined})
+            setDate({from: daySelection?.from, to: undefined});
+        }
+    }
 
     return (
         <Calendar
-            mode="single"
+            mode="range"
             selected={date}
             onSelect={setDate}
             className="rounded-md border shadow"
