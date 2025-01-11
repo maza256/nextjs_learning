@@ -55,6 +55,7 @@ export default function Page() {
         setDate({from: date.from, to: daySelection?.to});
     } else {
         console.log("Resetting it")
+        setDate({from: undefined, to:undefined})
         setDate({from: daySelection?.from, to: undefined});
     }
 }

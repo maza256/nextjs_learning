@@ -19,3 +19,6 @@ npx drizzle-kit migrate
 
 Then, run `npm run dev` to start the development server.
 
+For monitoring the CSS run:
+
+`npx tailwindcss -i ./app/ui/global.css -o ./app/ui/global.css --watch`
